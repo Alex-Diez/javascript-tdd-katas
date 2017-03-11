@@ -1,10 +1,20 @@
 {
   "name": "javascript-tdd-kata",
   "version": "1.0.0",
-  "scripts": {
-    "test": "jest"
+  "dependencies": {
+    "react": "~15.4.2",
+    "react-dom": "~15.4.2"
   },
   "devDependencies": {
-    "jest": "^18.1.0"
+    "babel-jest": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "jest": "*",
+    "react-addons-test-utils": "~15.4.2",
+    "react-test-renderer": "~15.4.2",
+    "regenerator-runtime": "*"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
