@@ -4,7 +4,7 @@ describe("bowling game kata", () => {
     var game;
 
     function rollMany(times, pins) {
-        for (i = 0; i < times; i++) {
+        for (var i = 0; i < times; i++) {
             game.roll(pins);
         }
     }

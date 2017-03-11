@@ -32,7 +32,7 @@ BowlingGame.prototype.score = function() {
         return self.rolls[frameIndex] + self.rolls[frameIndex + 1];
     }
 
-    for(frame = 0; frame < 10; frame++) {
+    for(var frame = 0; frame < 10; frame++) {
         if (isStrike()) {
             score += strikePoints();
             frameIndex += 1;

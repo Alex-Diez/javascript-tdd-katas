@@ -4,7 +4,7 @@ describe("bowling game kata", () => {
     var game;
 
     function rollMany(times, pins) {
-        for(i = 0; i < times; i++) {
+        for(var i = 0; i < times; i++) {
             game.roll(pins);
         }
     }
@@ -24,13 +24,13 @@ describe("bowling game kata", () => {
 
     test("gutter game", () => {
         rollMany(20, 0);
-        expect(game.score()).toBe(0)
+        expect(game.score()).toBe(0);
     });
 
     test("all ones", () => {
         rollMany(20, 1);
 
-        expect(game.score()).toBe(20)
+        expect(game.score()).toBe(20);
     });
 
     test("roll one spare", () => {
