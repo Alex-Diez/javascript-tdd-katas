@@ -2,7 +2,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import BowlingGame from "../kata";
 
-describe("bowling kata", () => {
+describe("bowling game", () => {
     let bowlingGame;
     let inputField;
     let rollButton;
@@ -100,5 +100,4 @@ describe("bowling kata", () => {
 
         expect(getScore()).toBe(300);
     });
-
 });
