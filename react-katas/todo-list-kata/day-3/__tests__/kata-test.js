@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import {TodoList, TaskList, Task, CreateTaskPanel, TaskName, AcceptButton} from '../kata';
 
 describe("todo list kata", () => {
@@ -8,34 +8,34 @@ describe("todo list kata", () => {
     let acceptButton;
 
     beforeEach(() => {
-        todoList = TestUtils.renderIntoDocument(
+        todoList = ReactTestUtils.renderIntoDocument(
             <TodoList/>
         );
 
-        const createTaskPanel = TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel);
+        const createTaskPanel = ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel);
 
-        inputField = TestUtils.findRenderedDOMComponentWithTag(createTaskPanel, 'input');
-        acceptButton = TestUtils.findRenderedDOMComponentWithTag(createTaskPanel, 'button');
+        inputField = ReactTestUtils.findRenderedDOMComponentWithTag(createTaskPanel, 'input');
+        acceptButton = ReactTestUtils.findRenderedDOMComponentWithTag(createTaskPanel, 'button');
     });
 
     test("task list is empty", () => {
-        const taskList = TestUtils.findRenderedComponentWithType(todoList, TaskList);
-        const tasks = TestUtils.scryRenderedComponentsWithType(taskList, Task);
+        const taskList = ReactTestUtils.findRenderedComponentWithType(todoList, TaskList);
+        const tasks = ReactTestUtils.scryRenderedComponentsWithType(taskList, Task);
 
         expect(tasks.length).toBe(0);
     });
 
     function createTask(taskName) {
         inputField.value = taskName;
-        TestUtils.Simulate.change(inputField);
-        TestUtils.Simulate.click(acceptButton);
+        ReactTestUtils.Simulate.change(inputField);
+        ReactTestUtils.Simulate.click(acceptButton);
     }
 
     test("task is add to task list by clicking 'accept' button", () => {
         createTask('Task #1');
 
-        const tasks = TestUtils.scryRenderedDOMComponentsWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
+        const tasks = ReactTestUtils.scryRenderedDOMComponentsWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
         );
 
         expect(tasks.length).toBe(1);
@@ -47,8 +47,8 @@ describe("todo list kata", () => {
         createTask('Task #2');
         createTask('Task #3');
 
-        const tasks = TestUtils.scryRenderedDOMComponentsWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
+        const tasks = ReactTestUtils.scryRenderedDOMComponentsWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
         );
 
         expect(tasks.length).toBe(3);

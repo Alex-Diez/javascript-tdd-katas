@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import LinkedDeque from '../kata';
 
 describe("linked deque", () => {
@@ -8,22 +8,22 @@ describe("linked deque", () => {
     let addFront;
 
     beforeEach(() => {
-        deque = TestUtils.renderIntoDocument(
+        deque = ReactTestUtils.renderIntoDocument(
             <LinkedDeque/>
         );
-        input = TestUtils.findRenderedDOMComponentWithTag(deque, 'input');
-        addFront = TestUtils.findRenderedDOMComponentWithClass(deque, 'add-front-button');
+        input = ReactTestUtils.findRenderedDOMComponentWithTag(deque, 'input');
+        addFront = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'add-front-button');
     });
 
     function getItems() {
-        return TestUtils.scryRenderedDOMComponentsWithClass(deque, 'item').map((item) => Number(item.textContent));
+        return ReactTestUtils.scryRenderedDOMComponentsWithClass(deque, 'item').map((item) => Number(item.textContent));
     }
 
     function addItems(size, action) {
         for (let i = 1; i < size + 1; i++) {
             input.value = i * 10;
-            TestUtils.Simulate.change(input);
-            TestUtils.Simulate.click(action);
+            ReactTestUtils.Simulate.change(input);
+            ReactTestUtils.Simulate.click(action);
         }
     }
 
@@ -32,7 +32,7 @@ describe("linked deque", () => {
 
         expect(items.length).toBe(0);
 
-        const renderedDeque = TestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
+        const renderedDeque = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
 
         expect(renderedDeque).toBe('');
     });
@@ -58,8 +58,8 @@ describe("linked deque", () => {
     test("remove one item from front", () => {
         addItems(3, addFront);
 
-        const removeFront = TestUtils.findRenderedDOMComponentWithClass(deque, 'remove-front-button');
-        TestUtils.Simulate.click(removeFront);
+        const removeFront = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'remove-front-button');
+        ReactTestUtils.Simulate.click(removeFront);
 
         const items = getItems();
 
@@ -68,7 +68,7 @@ describe("linked deque", () => {
     });
 
     test("add three items in back", () => {
-        const addBack = TestUtils.findRenderedDOMComponentWithClass(deque, 'add-back-button');
+        const addBack = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'add-back-button');
 
         addItems(3, addBack);
 
@@ -81,8 +81,8 @@ describe("linked deque", () => {
     test("remove item from back", () => {
         addItems(3, addFront);
 
-        const removeBack = TestUtils.findRenderedDOMComponentWithClass(deque, 'remove-back-button');
-        TestUtils.Simulate.click(removeBack);
+        const removeBack = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'remove-back-button');
+        ReactTestUtils.Simulate.click(removeBack);
 
         const items = getItems();
 
@@ -93,7 +93,7 @@ describe("linked deque", () => {
     test("single item surrounded by '<-' and '->'", () => {
         addItems(1, addFront);
 
-        const renderedDeque = TestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
+        const renderedDeque = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
 
         expect(renderedDeque).toBe('<-10->');
     });
@@ -101,7 +101,7 @@ describe("linked deque", () => {
     test("items that have neighbours surrounded by '<=>'", () => {
         addItems(3, addFront);
 
-        const renderedDeque = TestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
+        const renderedDeque = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
 
         expect(renderedDeque).toBe('<-30<=>20<=>10->');
     });

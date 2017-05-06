@@ -1,19 +1,19 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import {TodoList, TaskList, CreateTaskPanel} from '../kata';
 
 describe("todo list", () => {
     let todoList;
 
     beforeEach(() => {
-        todoList = TestUtils.renderIntoDocument(
+        todoList = ReactTestUtils.renderIntoDocument(
             <TodoList/>
         );
     });
 
     function findTasks() {
-        return TestUtils.scryRenderedDOMComponentsWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
+        return ReactTestUtils.scryRenderedDOMComponentsWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
         );
     }
 
@@ -24,17 +24,17 @@ describe("todo list", () => {
     });
 
     test("add task to todo list when click 'accept' button", () => {
-        const button = TestUtils.findRenderedDOMComponentWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'button'
+        const button = ReactTestUtils.findRenderedDOMComponentWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'button'
         );
 
-        const inputField = TestUtils.findRenderedDOMComponentWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'input'
+        const inputField = ReactTestUtils.findRenderedDOMComponentWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'input'
         );
 
         inputField.value = "Task #1";
-        TestUtils.Simulate.change(inputField);
-        TestUtils.Simulate.click(button);
+        ReactTestUtils.Simulate.change(inputField);
+        ReactTestUtils.Simulate.click(button);
 
         const tasks = findTasks();
 
@@ -43,25 +43,25 @@ describe("todo list", () => {
     });
 
     test("add many tasks to todo list", () => {
-        const button = TestUtils.findRenderedDOMComponentWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'button'
+        const button = ReactTestUtils.findRenderedDOMComponentWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'button'
         );
 
-        const inputField = TestUtils.findRenderedDOMComponentWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'input'
+        const inputField = ReactTestUtils.findRenderedDOMComponentWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'input'
         );
 
         inputField.value = 'Task #1';
-        TestUtils.Simulate.change(inputField);
-        TestUtils.Simulate.click(button);
+        ReactTestUtils.Simulate.change(inputField);
+        ReactTestUtils.Simulate.click(button);
 
         inputField.value = 'Task #2';
-        TestUtils.Simulate.change(inputField);
-        TestUtils.Simulate.click(button);
+        ReactTestUtils.Simulate.change(inputField);
+        ReactTestUtils.Simulate.click(button);
 
         inputField.value = 'Task #3';
-        TestUtils.Simulate.change(inputField);
-        TestUtils.Simulate.click(button);
+        ReactTestUtils.Simulate.change(inputField);
+        ReactTestUtils.Simulate.click(button);
 
         const tasks = findTasks();
 

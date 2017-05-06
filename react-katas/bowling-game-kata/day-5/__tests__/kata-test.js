@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import BowlingGame from '../kata';
 
 describe("bowling game", () => {
@@ -9,37 +9,37 @@ describe("bowling game", () => {
     let scoreButton;
 
     beforeEach(() => {
-        bowlingGame = TestUtils.renderIntoDocument(
+        bowlingGame = ReactTestUtils.renderIntoDocument(
             <BowlingGame/>
         );
-        rollInput = TestUtils.findRenderedDOMComponentWithTag(bowlingGame, 'input');
-        rollButton = TestUtils.findRenderedDOMComponentWithClass(bowlingGame, 'roll-button');
-        scoreButton = TestUtils.findRenderedDOMComponentWithClass(bowlingGame, 'score-button');
+        rollInput = ReactTestUtils.findRenderedDOMComponentWithTag(bowlingGame, 'input');
+        rollButton = ReactTestUtils.findRenderedDOMComponentWithClass(bowlingGame, 'roll-button');
+        scoreButton = ReactTestUtils.findRenderedDOMComponentWithClass(bowlingGame, 'score-button');
     });
 
     function rollMany(times, pins) {
         for (let i = 0; i < times; i++) {
             rollInput.value = pins;
-            TestUtils.Simulate.change(rollInput);
-            TestUtils.Simulate.click(rollButton);
+            ReactTestUtils.Simulate.change(rollInput);
+            ReactTestUtils.Simulate.click(rollButton);
         }
     }
 
     function calculateScore() {
-        TestUtils.Simulate.click(scoreButton);
+        ReactTestUtils.Simulate.click(scoreButton);
     }
 
     function getScore() {
-        return Number(TestUtils.findRenderedDOMComponentWithTag(bowlingGame, 'span').textContent);
+        return Number(ReactTestUtils.findRenderedDOMComponentWithTag(bowlingGame, 'span').textContent);
     }
 
     function rollSpare() {
         rollInput.value = 5;
-        TestUtils.Simulate.change(rollInput);
-        TestUtils.Simulate.click(rollButton);
+        ReactTestUtils.Simulate.change(rollInput);
+        ReactTestUtils.Simulate.click(rollButton);
         rollInput.value = 5;
-        TestUtils.Simulate.change(rollInput);
-        TestUtils.Simulate.click(rollButton);
+        ReactTestUtils.Simulate.change(rollInput);
+        ReactTestUtils.Simulate.click(rollButton);
     }
 
     test("gutter game", () => {
@@ -62,8 +62,8 @@ describe("bowling game", () => {
         rollSpare();
 
         rollInput.value = 3;
-        TestUtils.Simulate.change(rollInput);
-        TestUtils.Simulate.click(rollButton);
+        ReactTestUtils.Simulate.change(rollInput);
+        ReactTestUtils.Simulate.click(rollButton);
 
         rollMany(17, 0);
 
@@ -74,15 +74,15 @@ describe("bowling game", () => {
 
     test("roll one strike", () => {
         rollInput.value = 10;
-        TestUtils.Simulate.change(rollInput);
-        TestUtils.Simulate.click(rollButton);
+        ReactTestUtils.Simulate.change(rollInput);
+        ReactTestUtils.Simulate.click(rollButton);
 
         rollInput.value = 4;
-        TestUtils.Simulate.change(rollInput);
-        TestUtils.Simulate.click(rollButton);
+        ReactTestUtils.Simulate.change(rollInput);
+        ReactTestUtils.Simulate.click(rollButton);
         rollInput.value = 3;
-        TestUtils.Simulate.change(rollInput);
-        TestUtils.Simulate.click(rollButton);
+        ReactTestUtils.Simulate.change(rollInput);
+        ReactTestUtils.Simulate.click(rollButton);
 
         rollMany(16, 0);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Calculator from '../kata';
 
 describe("calculator", () => {
@@ -8,21 +8,21 @@ describe("calculator", () => {
     let evaluate;
 
     beforeEach(() => {
-        calculator = TestUtils.renderIntoDocument(
+        calculator = ReactTestUtils.renderIntoDocument(
             <Calculator/>
         );
-        input = TestUtils.findRenderedDOMComponentWithTag(calculator, 'input');
-        evaluate = TestUtils.findRenderedDOMComponentWithTag(calculator, 'button');
+        input = ReactTestUtils.findRenderedDOMComponentWithTag(calculator, 'input');
+        evaluate = ReactTestUtils.findRenderedDOMComponentWithTag(calculator, 'button');
     });
 
     function getResult() {
-        return TestUtils.findRenderedDOMComponentWithTag(calculator, 'span').textContent;
+        return ReactTestUtils.findRenderedDOMComponentWithTag(calculator, 'span').textContent;
     }
 
     function evaluateExpression(expression) {
         input.value = expression;
-        TestUtils.Simulate.change(input);
-        TestUtils.Simulate.click(evaluate);
+        ReactTestUtils.Simulate.change(input);
+        ReactTestUtils.Simulate.click(evaluate);
     }
 
     test("evaluates an empty string into '0'", () => {

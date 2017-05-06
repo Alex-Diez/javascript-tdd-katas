@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import CheckboxWithLabel from '../kata';
 
 describe("checkbox with label", () => {
@@ -8,7 +8,7 @@ describe("checkbox with label", () => {
     let checkboxNode;
 
     beforeEach(() => {
-        checkbox = TestUtils.renderIntoDocument(
+        checkbox = ReactTestUtils.renderIntoDocument(
             <CheckboxWithLabel/>
         );
 
@@ -20,20 +20,20 @@ describe("checkbox with label", () => {
     });
 
     test("label text contains 'On' when box checked", () => {
-        TestUtils.Simulate.change(
-            TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
+        ReactTestUtils.Simulate.change(
+            ReactTestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
         );
 
         expect(checkboxNode.textContent).toBe('On');
     });
 
     test("label text contains 'Off' when box clicked twice", () => {
-        TestUtils.Simulate.change(
-            TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
+        ReactTestUtils.Simulate.change(
+            ReactTestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
         );
 
-        TestUtils.Simulate.change(
-            TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
+        ReactTestUtils.Simulate.change(
+            ReactTestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
         );
 
         expect(checkboxNode.textContent).toBe('Off');

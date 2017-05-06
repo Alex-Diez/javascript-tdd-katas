@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import CheckboxWithLabel from '../kata';
 
 describe("check box with label", () => {
@@ -8,13 +8,13 @@ describe("check box with label", () => {
     let checkboxNode;
 
     function clickOnCheckbox() {
-        TestUtils.Simulate.change(
-            TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
+        ReactTestUtils.Simulate.change(
+            ReactTestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
         );
     }
 
     beforeEach(() => {
-        checkbox = TestUtils.renderIntoDocument(
+        checkbox = ReactTestUtils.renderIntoDocument(
             <CheckboxWithLabel/>
         );
         checkboxNode = ReactDom.findDOMNode(checkbox);

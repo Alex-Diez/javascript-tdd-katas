@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import LinkedDeque from '../kata';
 
 describe("linked deque", () => {
@@ -8,22 +8,22 @@ describe("linked deque", () => {
     let addFront;
 
     beforeEach(() => {
-        deque = TestUtils.renderIntoDocument(
+        deque = ReactTestUtils.renderIntoDocument(
             <LinkedDeque/>
         );
-        input = TestUtils.findRenderedDOMComponentWithTag(deque, 'input');
-        addFront = TestUtils.findRenderedDOMComponentWithClass(deque, 'add-front-button');
+        input = ReactTestUtils.findRenderedDOMComponentWithTag(deque, 'input');
+        addFront = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'add-front-button');
     });
 
     function getDequeItems() {
-        return TestUtils.scryRenderedDOMComponentsWithClass(deque, 'item').map((item) => Number(item.textContent));
+        return ReactTestUtils.scryRenderedDOMComponentsWithClass(deque, 'item').map((item) => Number(item.textContent));
     }
 
     function addItems(number) {
         for (let i = 1; i < number + 1; i++) {
             input.value = i * 10;
-            TestUtils.Simulate.change(input);
-            TestUtils.Simulate.click(addFront);
+            ReactTestUtils.Simulate.change(input);
+            ReactTestUtils.Simulate.click(addFront);
         }
     }
 
@@ -54,8 +54,8 @@ describe("linked deque", () => {
     test("remove item from front", () => {
         addItems(3);
 
-        const removeFront = TestUtils.findRenderedDOMComponentWithClass(deque, 'remove-front-button');
-        TestUtils.Simulate.click(removeFront);
+        const removeFront = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'remove-front-button');
+        ReactTestUtils.Simulate.click(removeFront);
 
         const items = getDequeItems();
 
@@ -64,12 +64,12 @@ describe("linked deque", () => {
     });
 
     test("add items in back", () => {
-        const addBack = TestUtils.findRenderedDOMComponentWithClass(deque, 'add-back-button');
+        const addBack = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'add-back-button');
 
         for (let i = 1; i < 4; i++) {
             input.value = i * 10;
-            TestUtils.Simulate.change(input);
-            TestUtils.Simulate.click(addBack);
+            ReactTestUtils.Simulate.change(input);
+            ReactTestUtils.Simulate.click(addBack);
         }
 
         const items = getDequeItems();
@@ -81,8 +81,8 @@ describe("linked deque", () => {
     test("remove items from back", () => {
         addItems(3);
 
-        const removeBack = TestUtils.findRenderedDOMComponentWithClass(deque, 'remove-back-button');
-        TestUtils.Simulate.click(removeBack);
+        const removeBack = ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'remove-back-button');
+        ReactTestUtils.Simulate.click(removeBack);
 
         const items = getDequeItems();
 
@@ -101,7 +101,7 @@ describe("linked deque", () => {
     });
 
     function getItemsImage() {
-        return TestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
+        return ReactTestUtils.findRenderedDOMComponentWithClass(deque, 'items').textContent;
     }
 
     test("item connected to not 'null' item with double arrow", () => {

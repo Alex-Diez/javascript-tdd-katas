@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Converter from '../kata';
 
 describe("roman numbers", () => {
@@ -8,21 +8,21 @@ describe("roman numbers", () => {
     let convert;
 
     beforeEach(() => {
-        converter = TestUtils.renderIntoDocument(
+        converter = ReactTestUtils.renderIntoDocument(
             <Converter/>
         );
-        input = TestUtils.findRenderedDOMComponentWithTag(converter, 'input');
-        convert = TestUtils.findRenderedDOMComponentWithTag(converter, 'button');
+        input = ReactTestUtils.findRenderedDOMComponentWithTag(converter, 'input');
+        convert = ReactTestUtils.findRenderedDOMComponentWithTag(converter, 'button');
     });
 
     function convertArabic(arabic) {
         input.value = arabic;
-        TestUtils.Simulate.change(input);
-        TestUtils.Simulate.click(convert);
+        ReactTestUtils.Simulate.change(input);
+        ReactTestUtils.Simulate.click(convert);
     }
 
     function conversionResult() {
-        return TestUtils.findRenderedDOMComponentWithTag(converter, 'span').textContent;
+        return ReactTestUtils.findRenderedDOMComponentWithTag(converter, 'span').textContent;
     }
 
     test("'0' is converted into an empty string", () => {

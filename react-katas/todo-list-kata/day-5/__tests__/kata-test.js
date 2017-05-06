@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import {TodoList, TaskList, CreateTaskPanel} from '../kata';
 
 describe("todo list", () => {
@@ -8,27 +8,27 @@ describe("todo list", () => {
     let inputField;
 
     beforeEach(() => {
-        todoList = TestUtils.renderIntoDocument(
+        todoList = ReactTestUtils.renderIntoDocument(
             <TodoList/>
         );
-        button = TestUtils.findRenderedDOMComponentWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'button'
+        button = ReactTestUtils.findRenderedDOMComponentWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'button'
         );
-        inputField = TestUtils.findRenderedDOMComponentWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'input'
+        inputField = ReactTestUtils.findRenderedDOMComponentWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, CreateTaskPanel), 'input'
         );
     });
 
     function findAllTasks() {
-        return TestUtils.scryRenderedDOMComponentsWithTag(
-            TestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
+        return ReactTestUtils.scryRenderedDOMComponentsWithTag(
+            ReactTestUtils.findRenderedComponentWithType(todoList, TaskList), 'li'
         );
     }
 
     function createTask(taskName) {
         inputField.value = taskName;
-        TestUtils.Simulate.change(inputField);
-        TestUtils.Simulate.click(button);
+        ReactTestUtils.Simulate.change(inputField);
+        ReactTestUtils.Simulate.click(button);
     }
 
     test("newly created task list is empty", () => {
